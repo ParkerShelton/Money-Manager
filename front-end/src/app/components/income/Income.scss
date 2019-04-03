@@ -1,0 +1,65 @@
+.Income {
+  width: 100%;
+  height: 100%;
+
+  .incomeForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    .incomeTitle {
+      display: flex;
+      // flex-direction: column;
+      justify-content: space-around;
+      width: 100%;
+      height: 100px;
+      background-color: blue;
+
+      h2 {
+        width: 100%;
+        text-align: center;
+        font-size: 35px;
+      }
+
+      button {
+        align-self: center;
+        width: 80px;
+        height: 30px;
+      }
+    }
+
+    .incomeListContainer {
+      width: 100%;
+
+      .incomeList {
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        // background-color: green;
+        margin: auto;
+
+        .incomeContainer {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin-top: 10px;
+          background-color: pink;
+
+          .incomeCategory {
+            width: 120px;
+          }
+
+          .incomeInput {
+            width: 100px;
+          }
+          .priceInput {
+            width: 50px;
+          }
+        }
+      }
+    }
+  }
+
+
+}

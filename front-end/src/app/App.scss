@@ -1,0 +1,20 @@
+.App {
+  text-align: center;
+  background-color: #ddd;
+
+  .pageContainer {
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    padding: 45px;
+    overflow: hidden;
+    background-color: yellow;
+
+    .title {
+      font-size: 45px;
+      font-weight: bold;
+      // margin-top: 10px;
+      margin-bottom: 20px;
+    }
+  }
+}

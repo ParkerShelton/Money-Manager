@@ -1,0 +1,23 @@
+
+td, th {
+  border: 2px solid #000;
+  width: 100%;
+  padding: 5px 0 5px 0;
+}
+
+.History {
+
+  border-collapse: collapse;
+
+  table {
+    // display: flex;
+    width: 100%;
+
+    tr {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+}
