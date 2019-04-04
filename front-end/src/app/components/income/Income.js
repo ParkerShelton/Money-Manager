@@ -26,11 +26,11 @@ class Income extends Component {
 
           <label>
             $
-            <input onChange={(e) => {this.props.handleChange(e, index)}} name="priceInput" className="priceInput" placeholder="Enter Price" type="text" value={incomeItem.amount} />
+            <input onChange={(e) => {this.props.handleChange(e, index)}} name="amountInput" className="amountInput" placeholder="Enter Amount" type="text" value={incomeItem.amount} />
           </label>
 
           <label>
-            <input type="date" name="dateInput" className="dateInput" value={incomeItem.date}/>
+            <input onChange={(e) => {this.props.handleChange(e, index)}} type="date" name="dateInput" className="dateInput" value={incomeItem.date}/>
           </label>
 
           <button className="incomeRemove" onClick={(e) => {this.props.removeIncome(e,incomeItem)}} >X</button>
@@ -44,7 +44,7 @@ class Income extends Component {
           <div className="incomeTitle">
             <button onClick={(e) => this.props.addIncome(e)}>Add Income</button>
 
-            <button onClick={(e) => this.props.submitIncome(e)}>Submit</button>
+            <button onClick={() => this.props.submitIncome()}>Submit</button>
           </div>
 
           <div className="incomeListContainer">

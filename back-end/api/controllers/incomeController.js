@@ -28,10 +28,10 @@ router.post("/", (request, response) => {
     dateCreated: request.body.dateCreated,
     category: request.body.category,
     name: request.body.name,
-    price: request.body.price
+    amount: request.body.amount
   };
 
-  let sql = `INSERT INTO income (id, date, dateCreated, category, name, price) VALUES("${incomeItem.id}", "${incomeItem.date}", "${incomeItem.dateCreated}", "${incomeItem.category}", "${incomeItem.name}", ${incomeItem.price});`;
+  let sql = `INSERT INTO income (id, date, dateCreated, category, name, amount) VALUES("${incomeItem.id}", "${incomeItem.date}", "${incomeItem.dateCreated}", "${incomeItem.category}", "${incomeItem.name}", ${incomeItem.amount});`;
 
   con.query(sql, (error, result) => {
     if(error) throw error;

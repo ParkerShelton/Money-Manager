@@ -15,7 +15,7 @@ class History extends Component {
           <td>{incomeItem.dateCreated}</td>
           <td>{incomeItem.category}</td>
           <td>{incomeItem.name}</td>
-          <td>{incomeItem.price}</td>
+          <td>{incomeItem.amount}</td>
         </tr>
       );
     });
@@ -30,7 +30,7 @@ class History extends Component {
               <th>Date Entered</th>
               <th>Category</th>
               <th>Name</th>
-              <th>Price</th>
+              <th>Amount</th>
             </tr>
           </thead>
 

@@ -5,7 +5,7 @@ import Home from './components/home/Home';
 import Manage from './components/manage/Manage';
 import History from './components/history/History';
 
-import {FetchIncome, AddIncome} from '../app/api/api.js';
+import {FetchIncome, SubmitIncome} from '../app/api/api.js';
 
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      menuSelect: 1,
+      menuSelect: 0,
 
       incomeList: [],
 
@@ -26,18 +26,42 @@ class App extends Component {
     this.generateId = this.generateId.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitIncome = this.submitIncome.bind(this);
+    this.routes = this.routes.bind(this);
   }
 
 
-  componentWillMount() {
-    FetchIncome().then((res) => {
+  // componentWillMount() {
+  //   if(this.state.menuSelect === 2) {
+  //     FetchIncome().then((res) => {
+  //       this.setState({
+  //         storedIncome: res
+  //       });
+  //     });
+  //   } else if(this.state.menuSelect === 1) {
+  //     this.addIncome();
 
-      this.setState({
-        storedIncome: res
+  //   }
+  // }
+
+  routes(e) {
+    if(e.target.name === "manage") {
+      if(this.state.incomeList.length === 0) {
+        this.addIncome();
+      }
+      this.setState({menuSelect: 1});
+
+    } else if(e.target.name === "history") {
+      FetchIncome().then((res) => {
+        this.setState({
+          storedIncome: res
+        });
       });
-    });
 
-    this.addIncome();
+      this.setState({menuSelect: 2});
+
+    } else if(e.target.name === "back") {
+      this.setState({menuSelect: 0});
+    }
   }
 
   generateId() {
@@ -53,7 +77,7 @@ class App extends Component {
     } else if(event.target.name === "incomeInput") {
       incomeList[index].name = event.target.value;
 
-    } else if(event.target.name === "priceInput") {
+    } else if(event.target.name === "amountInput") {
       incomeList[index].amount = event.target.value;
 
     } else if(event.target.name === "dateInput") {
@@ -71,13 +95,19 @@ class App extends Component {
     }
 
     let id = this.generateId();
-    let dateCreated = new Date();
+
+    let d = new Date();
+    let year = d.getFullYear();
+    let month = d.getDate();
+    let day = d.getDay();
+
+    let dateCreated = `${year}-${month}-${day}`;
 
     let incomeItem = {
       id: id,
       date: "",
       dateCreated: dateCreated,
-      category: "",
+      category: "check/DD",
       name: "",
       amount: 0
     }
@@ -100,15 +130,19 @@ class App extends Component {
 //               API CALLS               //
 ///////////////////////////////////////////
 
-  submitIncome(e) {
-    e.preventDefault();
-    AddIncome(this.state.incomeList);
+  submitIncome() {
+    SubmitIncome(this.state.incomeList);
   }
+
+///////////////////////////////////////////
+//                                       //
+///////////////////////////////////////////
+
 
   RenderPage() {
     switch(this.state.menuSelect) {
       case 0:
-        return <Home />;
+        return <Home routes={this.routes} />;
 
       case 1:
         return <Manage submitIncome={this.submitIncome} handleChange={this.handleChange} removeIncome={this.removeIncome} addIncome={this.addIncome} incomeList={this.state.incomeList}/>;
@@ -117,16 +151,28 @@ class App extends Component {
         return <History storedIncome={this.state.storedIncome}/>;
 
       default:
-        return <Home />;
+        return <Home routes={this.routes} />;
     }
   }
 
 
   render() {
 
+    let buttonClass = "";
+
+    if(this.state.menuSelect === 0) {
+      buttonClass = "backButtonHidden";
+    } else {
+      buttonClass = "backButton";
+    }
+
     return (
       <div className="App">
         <div className="pageContainer">
+          <div className="buttonContainer">
+            <button onClick={(e) => {this.routes(e)}} name="back" className={buttonClass}>Back</button>
+          </div>
+
           <h1 className="title">Money Manager</h1>
 
           {this.RenderPage()}

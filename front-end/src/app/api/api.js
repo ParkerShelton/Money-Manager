@@ -11,10 +11,10 @@ let FetchIncome = () => {
     });
 }
 
-let AddIncome = (incomeList) => {
+let SubmitIncome = (incomeList) => {
   const url = "http://localhost:8080/income";
 
-  for(let i = 0; i < incomeList; i++) {
+  for(let i = 0; i < incomeList.length; i++) {
 
     fetch(url, {
       method: 'POST',
@@ -26,11 +26,7 @@ let AddIncome = (incomeList) => {
       body: JSON.stringify(incomeList[i])
     });
 
-    // .then((res) => {
-    //   return res.json();
-    // }).then((resJSON) => {
-    //   return resJSON;
-    // })
+    console.log(incomeList[i]);
 
   }
 
@@ -39,5 +35,5 @@ let AddIncome = (incomeList) => {
 
 module.exports = {
   FetchIncome,
-  AddIncome
+  SubmitIncome
 }
