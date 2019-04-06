@@ -5,7 +5,7 @@ import Home from './components/home/Home';
 import Manage from './components/manage/Manage';
 import History from './components/history/History';
 
-import {FetchIncome, SubmitIncome} from '../app/api/api.js';
+import {FetchIncome, SubmitIncome, FetchExpenses, SubmitExpenses} from '../app/api/api.js';
 
 
 class App extends Component {
@@ -17,15 +17,23 @@ class App extends Component {
       menuSelect: 0,
 
       incomeList: [],
+      storedIncome: [],
 
-      storedIncome: []
+      expenseList: [],
+      storedExpense: []
     }
 
     this.addIncome = this.addIncome.bind(this);
+    this.addExpense = this.addExpense.bind(this);
+
     this.removeIncome = this.removeIncome.bind(this);
-    this.generateId = this.generateId.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.removeExpense = this.removeExpense.bind(this);
+
     this.submitIncome = this.submitIncome.bind(this);
+    this.submitExpense = this.submitExpense.bind(this);
+
+    this.handleChange = this.handleChange.bind(this);
+    this.generateId = this.generateId.bind(this);
     this.routes = this.routes.bind(this);
   }
 
@@ -47,6 +55,7 @@ class App extends Component {
     if(e.target.name === "manage") {
       if(this.state.incomeList.length === 0) {
         this.addIncome();
+        this.addExpense();
       }
       this.setState({menuSelect: 1});
 
@@ -98,6 +107,10 @@ class App extends Component {
     );
   }
 
+
+/////////////////////////////////
+//           INCOME            //
+/////////////////////////////////
   addIncome(e) {
     if(e != null) {
       e.preventDefault();
@@ -135,6 +148,46 @@ class App extends Component {
   }
 
 
+/////////////////////////////////
+//           EXPENSE           //
+/////////////////////////////////
+  addExpense(e) {
+    if(e != null) {
+      e.preventDefault();
+    }
+
+    let id = this.generateId();
+
+    let d = new Date();
+    let year = d.getFullYear();
+    let month = d.getDate();
+    let day = d.getDay();
+
+    let dateCreated = `${year}-${month}-${day}`;
+
+    let expenseItem = {
+      id: id,
+      date: "",
+      dateCreated: dateCreated,
+      category: "check/DD",
+      name: "",
+      amount: 0
+    }
+
+    this.setState({expenseList: [...this.state.expenseList, expenseItem]});
+  }
+
+  removeExpense(e, expenseItem) {
+    e.preventDefault();
+
+    for(let i = 0; i < (this.state.expenseList.length); i++) {
+      var newExpenseList = this.state.expenseList.filter(expense => expense.id !== expenseItem.id);
+    }
+
+    this.setState({expenseList: newExpenseList});
+  }
+
+
 ///////////////////////////////////////////
 //               API CALLS               //
 ///////////////////////////////////////////
@@ -143,6 +196,9 @@ class App extends Component {
     SubmitIncome(this.state.incomeList);
   }
 
+  submitExpense() {
+    SubmitExpenses(this.state.expenseList);
+  }
 ///////////////////////////////////////////
 //                                       //
 ///////////////////////////////////////////
@@ -154,7 +210,15 @@ class App extends Component {
         return <Home routes={this.routes} />;
 
       case 1:
-        return <Manage submitIncome={this.submitIncome} handleChange={this.handleChange} removeIncome={this.removeIncome} addIncome={this.addIncome} incomeList={this.state.incomeList}/>;
+        return <Manage submitIncome={this.submitIncome}
+                       submitExpense={this.submitExpense}
+                       removeIncome={this.removeIncome}
+                       removeExpense={this.removeExpense}
+                       addIncome={this.addIncome}
+                       addExpense={this.addExpense}
+                       handleChange={this.handleChange}
+                       incomeList={this.state.incomeList}
+                       expenseList={this.state.expenseList}/>;
 
       case 2:
         return <History storedIncome={this.state.storedIncome}/>;

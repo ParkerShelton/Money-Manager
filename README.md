@@ -26,17 +26,17 @@
 - [X] Create the expense mysql table
 - [X] Make back end endpoints for posting and getting expense data from database
 - [X] Create front end functions to post and get data from back end
-- [ ] Add expenseList to state in App.js
-- [ ] Add storedExpense to state in App.js
-- [ ] Make the expense form in the manage page
-- [ ] Add state inside Manage.js to be able pick between income, expense, and gift card tabs
-- [ ] Add actual tabs in the Manage.js (have them be buttons)
+- [X] Add expenseList to state in App.js
+- [X] Add storedExpense to state in App.js
+- [X] Make the expense form in the manage page
+- [X] Add state inside Manage.js to be able pick between income, expense, and gift card tabs
+- [X] Add actual tabs in the Manage.js (have them be buttons)
+- [X] Create addExpense() function in App.js
+- [X] Create removeExpense() function in App.js
+- [X] Create submitExpense() function in App.js
 
 ### V1.2
-- [ ] Create addExpense() function in App.js
-- [ ] Create removeExpense() function in App.js
 - [ ] Add cases to switch in handleChange function in App.js
-- [ ] Create submitExpense() function in App.js
 - [ ] Have history table list the expenses along with the income
 - [ ] Make total on the home page add and subtract all amount from history list
 - [ ] In the manage page, make a separate tab for gift cards
