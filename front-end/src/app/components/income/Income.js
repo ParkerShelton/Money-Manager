@@ -13,7 +13,7 @@ class Income extends Component {
             <select onChange={(e) => {this.props.handleChange(e, index)}} name="incomeCategory" className="incomeCategory">
               <option value="check">Check/DD</option>
               <option value="cash">Cash</option>
-              <option value="giftCard">Gift Card</option>
+              {/* <option value="giftCard">Gift Card</option> */}
               <option value="returnedItem">Returned Item</option>
               <option value="soldItem">Sold Item</option>
               <option value="other">Other</option>

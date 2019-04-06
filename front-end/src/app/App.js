@@ -71,18 +71,27 @@ class App extends Component {
   handleChange(event, index) {
     let incomeList = this.state.incomeList;
 
-    if(event.target.name === "incomeCategory") {
-      incomeList[index].category = event.target.value;
+    switch(event.target.name) {
+      case "incomeCategory":
+        incomeList[index].category = event.target.value;
+        break;
 
-    } else if(event.target.name === "incomeInput") {
-      incomeList[index].name = event.target.value;
+      case "incomeInput":
+        incomeList[index].name = event.target.value;
+        break;
 
-    } else if(event.target.name === "amountInput") {
-      incomeList[index].amount = event.target.value;
+      case "amountInput":
+        incomeList[index].amount = event.target.value;
+        break;
 
-    } else if(event.target.name === "dateInput") {
-      incomeList[index].date = event.target.value;
+      case "dateInput":
+        incomeList[index].date = event.target.value;
+        break;
+
+      default:
+        break;
     }
+
 
     this.setState(
       incomeList
