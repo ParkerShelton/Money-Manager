@@ -11,11 +11,11 @@ class Expense extends Component {
         <li className="expenseContainer" key={index}>
           <label>
             <select onChange={(e) => {this.props.handleChange(e, index)}} name="expenseCategory" className="expenseCategory">
-              <option value="check">Check/DD</option>
-              <option value="cash">Cash</option>
-              {/* <option value="giftCard">Gift Card</option> */}
-              <option value="returnedItem">Returned Item</option>
-              <option value="soldItem">Sold Item</option>
+              <option value="house">House</option>
+              <option value="grocery">Grocery</option>
+              <option value="car">Car</option>
+              <option value="medical">Medical</option>
+              <option value="apparel">Apparel</option>
               <option value="other">Other</option>
             </select>
           </label>
@@ -26,11 +26,11 @@ class Expense extends Component {
 
           <label>
             $
-            <input onChange={(e) => {this.props.handleChange(e, index)}} name="amountInput" className="amountInput" placeholder="Enter Amount" type="text" value={expenseItem.amount} />
+            <input onChange={(e) => {this.props.handleChange(e, index)}} name="expenseAmount" className="amountInput" placeholder="Enter Amount" type="text" value={expenseItem.amount} />
           </label>
 
           <label>
-            <input onChange={(e) => {this.props.handleChange(e, index)}} type="date" name="dateInput" className="dateInput" value={expenseItem.date}/>
+            <input onChange={(e) => {this.props.handleChange(e, index)}} type="date" name="expenseDate" className="dateInput" value={expenseItem.date}/>
           </label>
 
           <button className="expenseRemove" onClick={(e) => {this.props.removeExpense(e,expenseItem)}} >X</button>

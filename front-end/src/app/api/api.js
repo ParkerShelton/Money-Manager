@@ -1,3 +1,17 @@
+//////////////////////////////////////////////
+//                  HISTORY                 //
+//////////////////////////////////////////////
+
+let FetchHistory = () => {
+  const url = "http://localhost:8080/history";
+
+  return fetch(url)
+    .then((res) => res.json())
+    .then((resJSON) => {
+      return resJSON;
+    });
+}
+
 
 
 //////////////////////////////////////////////
@@ -75,5 +89,6 @@ module.exports = {
   FetchIncome,
   SubmitIncome,
   FetchExpenses,
-  SubmitExpenses
+  SubmitExpenses,
+  FetchHistory
 }

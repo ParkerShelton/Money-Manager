@@ -5,7 +5,7 @@ import Home from './components/home/Home';
 import Manage from './components/manage/Manage';
 import History from './components/history/History';
 
-import {FetchIncome, SubmitIncome, FetchExpenses, SubmitExpenses} from '../app/api/api.js';
+import {FetchIncome, SubmitIncome, FetchExpenses, SubmitExpenses, FetchHistory} from '../app/api/api.js';
 
 
 class App extends Component {
@@ -17,10 +17,11 @@ class App extends Component {
       menuSelect: 0,
 
       incomeList: [],
-      storedIncome: [],
-
       expenseList: [],
-      storedExpense: []
+
+      storedIncome: [],
+      storedExpense: [],
+      storedHistory: []
     }
 
     this.addIncome = this.addIncome.bind(this);
@@ -38,19 +39,6 @@ class App extends Component {
   }
 
 
-  // componentWillMount() {
-  //   if(this.state.menuSelect === 2) {
-  //     FetchIncome().then((res) => {
-  //       this.setState({
-  //         storedIncome: res
-  //       });
-  //     });
-  //   } else if(this.state.menuSelect === 1) {
-  //     this.addIncome();
-
-  //   }
-  // }
-
   routes(e) {
     if(e.target.name === "manage") {
       if(this.state.incomeList.length === 0) {
@@ -60,9 +48,9 @@ class App extends Component {
       this.setState({menuSelect: 1});
 
     } else if(e.target.name === "history") {
-      FetchIncome().then((res) => {
+      FetchHistory().then((res) => {
         this.setState({
-          storedIncome: res
+          storedHistory: res
         });
       });
 
@@ -79,8 +67,10 @@ class App extends Component {
 
   handleChange(event, index) {
     let incomeList = this.state.incomeList;
+    let expenseList = this.state.expenseList;
 
     switch(event.target.name) {
+      //INCOME
       case "incomeCategory":
         incomeList[index].category = event.target.value;
         break;
@@ -89,12 +79,29 @@ class App extends Component {
         incomeList[index].name = event.target.value;
         break;
 
-      case "amountInput":
+      case "incomeAmount":
         incomeList[index].amount = event.target.value;
         break;
 
-      case "dateInput":
+      case "incomeDate":
         incomeList[index].date = event.target.value;
+        break;
+
+      //EXPENSE
+      case "expenseCategory":
+        expenseList[index].category = event.target.value;
+        break;
+
+      case "expenseInput":
+        expenseList[index].name = event.target.value;
+        break;
+
+      case "expenseAmount":
+        expenseList[index].amount = event.target.value;
+        break;
+
+      case "expenseDate":
+        expenseList[index].date = event.target.value;
         break;
 
       default:
@@ -102,8 +109,10 @@ class App extends Component {
     }
 
 
-    this.setState(
-      incomeList
+    this.setState({
+      incomeList: incomeList,
+      expenseList: expenseList
+    }
     );
   }
 
@@ -116,7 +125,7 @@ class App extends Component {
       e.preventDefault();
     }
 
-    let id = this.generateId();
+    let id = "i" + this.generateId();
 
     let d = new Date();
     let year = d.getFullYear();
@@ -156,7 +165,7 @@ class App extends Component {
       e.preventDefault();
     }
 
-    let id = this.generateId();
+    let id = "e" + this.generateId();
 
     let d = new Date();
     let year = d.getFullYear();
@@ -221,7 +230,7 @@ class App extends Component {
                        expenseList={this.state.expenseList}/>;
 
       case 2:
-        return <History storedIncome={this.state.storedIncome}/>;
+        return <History storedHistory={this.state.storedHistory}/>;
 
       default:
         return <Home routes={this.routes} />;

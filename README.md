@@ -36,8 +36,9 @@
 - [X] Create submitExpense() function in App.js
 
 ### V1.2
-- [ ] Add cases to switch in handleChange function in App.js
-- [ ] Have history table list the expenses along with the income
+- [X] Add cases to switch in handleChange function in App.js
+- [X] Have history table list the expenses along with the income
+- [ ] Color row's backgrounf green if it's income and red if it's expense
 - [ ] Make total on the home page add and subtract all amount from history list
 - [ ] In the manage page, make a separate tab for gift cards
 - [ ] Be able to sort the gift cards by the store they are for and the amount of money they have left

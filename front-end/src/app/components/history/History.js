@@ -6,22 +6,38 @@ class History extends Component {
 
   render() {
 
-    let storedIncome = this.props.storedIncome.map((incomeItem, index) => {
+    let storedHistorySorted = this.props.storedHistory.sort((a,b) => {
+      if(a.date > b.date) return -1;
+      if(a.date < b.date) return 1;
+      return 0;
+    }).map((historyItem, index) => {
+      let itemClass = "";
+
+      if((historyItem.id).charAt(0) === "i") {
+        itemClass = "incomeItem";
+
+      } else if((historyItem.id).charAt(0) === "e") {
+        itemClass = "expenseItem";
+      }
 
       return (
-        <tr key={index}>
-          <td>{incomeItem.id}</td>
-          <td>{incomeItem.date}</td>
-          <td>{incomeItem.dateCreated}</td>
-          <td>{incomeItem.category}</td>
-          <td>{incomeItem.name}</td>
-          <td>{incomeItem.amount}</td>
+        <tr className={itemClass} key={index}>
+          <td>{historyItem.id}</td>
+          <td>{historyItem.date}</td>
+          <td>{historyItem.dateCreated}</td>
+          <td>{historyItem.category}</td>
+          <td>{historyItem.name}</td>
+          <td>{historyItem.amount}</td>
         </tr>
       );
     });
 
     return (
       <div className="History">
+        <div className="sortContainer">
+
+        </div>
+
         <table>
           <thead>
             <tr>
@@ -35,7 +51,7 @@ class History extends Component {
           </thead>
 
           <tbody>
-            {storedIncome}
+            {storedHistorySorted}
           </tbody>
         </table>
       </div>

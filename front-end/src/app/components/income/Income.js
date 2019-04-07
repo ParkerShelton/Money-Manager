@@ -26,11 +26,11 @@ class Income extends Component {
 
           <label>
             $
-            <input onChange={(e) => {this.props.handleChange(e, index)}} name="amountInput" className="amountInput" placeholder="Enter Amount" type="text" value={incomeItem.amount} />
+            <input onChange={(e) => {this.props.handleChange(e, index)}} name="incomeAmount" className="amountInput" placeholder="Enter Amount" type="text" value={incomeItem.amount} />
           </label>
 
           <label>
-            <input onChange={(e) => {this.props.handleChange(e, index)}} type="date" name="dateInput" className="dateInput" value={incomeItem.date}/>
+            <input onChange={(e) => {this.props.handleChange(e, index)}} type="date" name="incomeDate" className="dateInput" value={incomeItem.date}/>
           </label>
 
           <button className="incomeRemove" onClick={(e) => {this.props.removeIncome(e,incomeItem)}} >X</button>

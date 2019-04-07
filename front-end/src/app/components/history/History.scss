@@ -18,6 +18,13 @@ td, th {
       width: 100%;
       justify-content: space-between;
     }
+
+    .incomeItem {
+      background-color: green;
+    }
+    .expenseItem {
+      background-color: red;
+    }
   }
 
 }
