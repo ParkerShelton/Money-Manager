@@ -17,13 +17,17 @@ td, th {
       display: flex;
       width: 100%;
       justify-content: space-between;
+
+      th {
+        background-color: #FBF5F3;
+      }
     }
 
     .incomeItem {
-      background-color: green;
+      background-color: #4CB963;
     }
     .expenseItem {
-      background-color: red;
+      background-color: #E4572E;
     }
   }
 

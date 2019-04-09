@@ -1,16 +1,25 @@
 # Money Manager
 
+### Colors
+```
+Dark Purple: #4546B1
+Medium Purple: #4B4CC2
+Light Purple: #5658DD
+Light Blue: #8185E8
+White: #E4E3FF
+```
+
 
 ### Income Form
-  - ID of income item : VARCHAR(10)
+  - ID of income item : VARCHAR(20)
   - Category of the income (Check/DD, Cash, Returned Item, Sold Item, Other) : VARCHAR(30)
   - Name of income : VARCHAR(30)
-  - Amount of income : DECIAML(8,2)
+  - Amount of income : DECIMAL(8,2)
   - Date you got the income : DATE
   - Date you enter the income in to the form : DATE
 
 ### Expense Form
-  - Category of the expense (House, Grocery, Car, Medical, Clothing) : VARCHAR(10)
+  - Category of the expense (House, Grocery, Car, Medical, Clothing) : VARCHAR(20)
   - Name of expense : VARCHAR(30)
   - Amount of the expense : DECIMAL(8,2)
   - Date you spent the money : DATE
@@ -38,8 +47,12 @@
 ### V1.2
 - [X] Add cases to switch in handleChange function in App.js
 - [X] Have history table list the expenses along with the income
-- [ ] Color row's backgrounf green if it's income and red if it's expense
-- [ ] Make total on the home page add and subtract all amount from history list
-- [ ] In the manage page, make a separate tab for gift cards
+- [X] Color row's backgroung green if it's income and red if it's expense
+- [X] Make total on the home page add and subtract all amount from history list
+- [X] Make a footer the has all the navigation
+
+### V1.3
+- [ ] Get rid of Manage page and turn it into the different pages (income, expense, and giftcard)
+- [ ] Make the icons in the footer change color when selected
 - [ ] Be able to sort the gift cards by the store they are for and the amount of money they have left
 - [ ] Be able to sort the history by all of the parameters.

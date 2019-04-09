@@ -4,8 +4,9 @@ import './App.scss';
 import Home from './components/home/Home';
 import Manage from './components/manage/Manage';
 import History from './components/history/History';
+import Footer from './components/footer/Footer';
 
-import {FetchIncome, SubmitIncome, FetchExpenses, SubmitExpenses, FetchHistory} from '../app/api/api.js';
+import {SubmitIncome, SubmitExpenses, FetchHistory} from '../app/api/api.js';
 
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
 
     this.state = {
       menuSelect: 0,
+      moneyTotal: 0,
 
       incomeList: [],
       expenseList: [],
@@ -36,8 +38,31 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.generateId = this.generateId.bind(this);
     this.routes = this.routes.bind(this);
+    this.calculateTotal = this.calculateTotal.bind(this);
   }
 
+  componentDidMount() {
+    this.calculateTotal();
+  }
+
+  calculateTotal() {
+    let total = 0;
+    FetchHistory().then((res) => {
+      for(let i = 0; i < res.length; i++) {
+        if((res[i].id).charAt(0) === "i") {
+          total = total + res[i].amount;
+
+        } else if((res[i].id).charAt(0) === "e") {
+          total = total - res[i].amount;
+        }
+      }
+
+
+      if(total !== this.state.moneyTotal) {
+        this.setState({moneyTotal: total});
+      }
+    })
+  }
 
   routes(e) {
     if(e.target.name === "manage") {
@@ -57,13 +82,14 @@ class App extends Component {
       this.setState({menuSelect: 2});
 
     } else if(e.target.name === "back") {
+      this.calculateTotal();
       this.setState({menuSelect: 0});
     }
   }
 
   generateId() {
     return '_' + Math.random().toString(36).substr(2, 9);
-  };
+  }
 
   handleChange(event, index) {
     let incomeList = this.state.incomeList;
@@ -130,9 +156,10 @@ class App extends Component {
     let d = new Date();
     let year = d.getFullYear();
     let month = d.getDate();
-    let day = d.getDay();
+    let day = d.getDate();
 
     let dateCreated = `${year}-${month}-${day}`;
+    console.log(dateCreated);
 
     let incomeItem = {
       id: id,
@@ -170,7 +197,7 @@ class App extends Component {
     let d = new Date();
     let year = d.getFullYear();
     let month = d.getDate();
-    let day = d.getDay();
+    let day = d.getDate();
 
     let dateCreated = `${year}-${month}-${day}`;
 
@@ -216,7 +243,7 @@ class App extends Component {
   RenderPage() {
     switch(this.state.menuSelect) {
       case 0:
-        return <Home routes={this.routes} />;
+        return <Home calculateTotal={this.calculateTotal} moneyTotal={this.state.moneyTotal} routes={this.routes} />;
 
       case 1:
         return <Manage submitIncome={this.submitIncome}
@@ -233,7 +260,7 @@ class App extends Component {
         return <History storedHistory={this.state.storedHistory}/>;
 
       default:
-        return <Home routes={this.routes} />;
+        return <Home moneyTotal={this.state.moneyTotal} routes={this.routes} />;
     }
   }
 
@@ -255,10 +282,11 @@ class App extends Component {
             <button onClick={(e) => {this.routes(e)}} name="back" className={buttonClass}>Back</button>
           </div>
 
-          <h1 className="title">Money Manager</h1>
-
+          {/* <h1 className="title">Money Manager</h1> */}
           {this.RenderPage()}
         </div>
+
+        <Footer />
       </div>
     );
   }
