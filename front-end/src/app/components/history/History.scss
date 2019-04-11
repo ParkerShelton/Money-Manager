@@ -1,16 +1,16 @@
+@import "../../globals.scss";
+
 
 td, th {
-  border: 2px solid #000;
+  border: 2px solid $darkestPurple;
   width: 100%;
   padding: 5px 0 5px 0;
 }
 
 .History {
-
-  border-collapse: collapse;
+  // margin-top: 30px;
 
   table {
-    // display: flex;
     width: 100%;
 
     tr {
@@ -19,15 +19,36 @@ td, th {
       justify-content: space-between;
 
       th {
-        background-color: #FBF5F3;
+        background-color: $lightestPurple;
+        color: $white;
+        font-size: 25px;
+        font-weight: bold;
+      }
+    }
+
+    td {
+      display: flex;
+      color: $white;
+      font-size: 20px;
+      background-color: $darkPurple;
+      span {
+        margin: auto;
       }
     }
 
     .incomeItem {
-      background-color: #4CB963;
+      .symbol {
+        font-size: 25px;
+        margin-right: 5px;
+        color: $green;
+      }
     }
     .expenseItem {
-      background-color: #E4572E;
+      .symbol {
+        font-size: 25px;
+        margin-right: 5px;
+        color: $red;
+      }
     }
   }
 

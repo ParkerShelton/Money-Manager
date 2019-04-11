@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './reset.scss'
 import './App.scss';
 import Home from './components/home/Home';
-import Manage from './components/manage/Manage';
+import Income from './components/income/Income';
+import Expense from './components/expense/Expense';
 import History from './components/history/History';
 import Footer from './components/footer/Footer';
 
@@ -37,8 +38,8 @@ class App extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.generateId = this.generateId.bind(this);
-    this.routes = this.routes.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
+    this.buttonClicked = this.buttonClicked.bind(this);
   }
 
   componentDidMount() {
@@ -62,29 +63,6 @@ class App extends Component {
         this.setState({moneyTotal: total});
       }
     })
-  }
-
-  routes(e) {
-    if(e.target.name === "manage") {
-      if(this.state.incomeList.length === 0) {
-        this.addIncome();
-        this.addExpense();
-      }
-      this.setState({menuSelect: 1});
-
-    } else if(e.target.name === "history") {
-      FetchHistory().then((res) => {
-        this.setState({
-          storedHistory: res
-        });
-      });
-
-      this.setState({menuSelect: 2});
-
-    } else if(e.target.name === "back") {
-      this.calculateTotal();
-      this.setState({menuSelect: 0});
-    }
   }
 
   generateId() {
@@ -140,6 +118,49 @@ class App extends Component {
       expenseList: expenseList
     }
     );
+  }
+
+  buttonClicked(buttonName) {
+
+    switch(buttonName) {
+
+      case "home":
+        this.calculateTotal();
+        this.setState({menuSelect: 0});
+        break;
+
+      case "history":
+        FetchHistory().then((res) => {
+          this.setState({
+            storedHistory: res
+          });
+        });
+        this.setState({menuSelect: 1});
+        break;
+
+      case "income":
+        if(this.state.incomeList.length === 0) {
+          this.addIncome();
+        }
+        this.setState({menuSelect: 2});
+        break;
+
+      case "expense":
+        if(this.state.expenseList.length === 0) {
+          this.addExpense();
+        }
+        this.setState({menuSelect: 3});
+        break;
+
+      case "card":
+        this.setState({menuSelect: 4});
+        break;
+
+      default:
+        this.calculateTotal();
+        this.setState({menuSelect: 0});
+        break;
+    }
   }
 
 
@@ -240,53 +261,52 @@ class App extends Component {
 ///////////////////////////////////////////
 
 
+
   RenderPage() {
     switch(this.state.menuSelect) {
       case 0:
-        return <Home calculateTotal={this.calculateTotal} moneyTotal={this.state.moneyTotal} routes={this.routes} />;
+        return <Home calculateTotal={this.calculateTotal} moneyTotal={this.state.moneyTotal} />;
 
       case 1:
-        return <Manage submitIncome={this.submitIncome}
-                       submitExpense={this.submitExpense}
-                       removeIncome={this.removeIncome}
-                       removeExpense={this.removeExpense}
-                       addIncome={this.addIncome}
-                       addExpense={this.addExpense}
-                       handleChange={this.handleChange}
-                       incomeList={this.state.incomeList}
-                       expenseList={this.state.expenseList}/>;
-
-      case 2:
         return <History storedHistory={this.state.storedHistory}/>;
 
+      case 2:
+        return <Income
+                      handleChange={this.handleChange}
+                      incomeList={this.state.incomeList}
+                      submitIncome={this.submitIncome}
+                      addIncome={this.addIncome}
+                      removeIncome={this.removeIncome}
+                      />;
+
+      case 3:
+        return <Expense
+                      handleChange={this.handleChange}
+                      expenseList={this.state.expenseList}
+                      submitExpense={this.submitExpense}
+                      addExpense={this.addExpense}
+                      removeExpense={this.removeExpense}
+                      />;
+
+      case 4:
+        // return <GiftCard />;
+        break;
+
       default:
-        return <Home moneyTotal={this.state.moneyTotal} routes={this.routes} />;
+        return <Home moneyTotal={this.state.moneyTotal} />;
     }
   }
 
 
   render() {
-
-    let buttonClass = "";
-
-    if(this.state.menuSelect === 0) {
-      buttonClass = "backButtonHidden";
-    } else {
-      buttonClass = "backButton";
-    }
-
     return (
       <div className="App">
         <div className="pageContainer">
-          <div className="buttonContainer">
-            <button onClick={(e) => {this.routes(e)}} name="back" className={buttonClass}>Back</button>
-          </div>
-
-          {/* <h1 className="title">Money Manager</h1> */}
           {this.RenderPage()}
         </div>
 
-        <Footer />
+        <Footer buttonClicked={this.buttonClicked} menuSelect={this.state.menuSelect} />
+        {console.log(this.state.menuSelect)}
       </div>
     );
   }

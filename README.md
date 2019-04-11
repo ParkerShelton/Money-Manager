@@ -2,6 +2,7 @@
 
 ### Colors
 ```
+Selected Purple: #585ed8
 Dark Purple: #4546B1
 Medium Purple: #4B4CC2
 Light Purple: #5658DD
@@ -52,7 +53,11 @@ White: #E4E3FF
 - [X] Make a footer the has all the navigation
 
 ### V1.3
-- [ ] Get rid of Manage page and turn it into the different pages (income, expense, and giftcard)
-- [ ] Make the icons in the footer change color when selected
+- [X] Get rid of Manage page and turn it into the different pages (income, expense, and giftcard)
+- [X] Make the icons in the footer change color when selected
+- [ ] For any list in the app, set a max height of the container and set the overflow to scroll
+- [ ] Style income and expense forms
+- [ ] Add a slider to the home page to show different things
+- [ ] Create a graph on the home page that maps our money monthly
 - [ ] Be able to sort the gift cards by the store they are for and the amount of money they have left
 - [ ] Be able to sort the history by all of the parameters.

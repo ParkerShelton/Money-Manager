@@ -6,17 +6,13 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <div className="menuContainer">
+        <div className="sliderContainer">
 
-          <div className="amountContainer">
+          <div className="totalSlide">
+            <p>Total Amount</p>
             <h2 className="total"><span>$</span>{this.props.moneyTotal}</h2>
           </div>
 
-            {/* <p className="checking">C: $1,000</p> */}
-            {/* <p className="saving">S: $4,000</p> */}
-
-            {/* <button onClick={(e) => {this.props.routes(e)}} name="manage" className="button">Manage</button> */}
-            {/* <button onClick={(e) => {this.props.routes(e)}} name="history" className="button">History</button> */}
         </div>
       </div>
     );

@@ -12,22 +12,22 @@ class History extends Component {
       return 0;
     }).map((historyItem, index) => {
       let itemClass = "";
+      let itemSymbol = "";
 
       if((historyItem.id).charAt(0) === "i") {
         itemClass = "incomeItem";
+        itemSymbol = "+";
 
       } else if((historyItem.id).charAt(0) === "e") {
         itemClass = "expenseItem";
+        itemSymbol = "-";
       }
 
       return (
         <tr className={itemClass} key={index}>
-          {/* <td>{historyItem.id}</td> */}
-          <td>{historyItem.date}</td>
-          {/* <td>{historyItem.dateCreated}</td> */}
-          {/* <td>{historyItem.category}</td> */}
-          <td>{historyItem.name}</td>
-          <td>${historyItem.amount}</td>
+          <td><span>{historyItem.date}</span></td>
+          <td><span>{historyItem.name}</span></td>
+          <td><span>  <span className="symbol">{itemSymbol}</span>  ${historyItem.amount}</span></td>
         </tr>
       );
     });
@@ -38,10 +38,7 @@ class History extends Component {
         <table>
           <thead>
             <tr>
-              {/* <th>ID</th> */}
               <th>Date</th>
-              {/* <th>Date Entered</th> */}
-              {/* <th>Category</th> */}
               <th>Name</th>
               <th>Amount</th>
             </tr>
