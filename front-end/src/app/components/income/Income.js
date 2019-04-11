@@ -8,30 +8,35 @@ class Income extends Component {
 
     let incomeList = this.props.incomeList.map((incomeItem, index) => {
       return(
-        <li className="incomeContainer" key={index}>
-          <label>
-            <select onChange={(e) => {this.props.handleChange(e, index)}} name="incomeCategory" className="incomeCategory">
-              <option value="check">Check/DD</option>
-              <option value="cash">Cash</option>
-              {/* <option value="giftCard">Gift Card</option> */}
-              <option value="returnedItem">Returned Item</option>
-              <option value="soldItem">Sold Item</option>
-              <option value="other">Other</option>
-            </select>
-          </label>
+        <li className="incomeItem" key={index}>
+          <div className="leftHalf">
+            <label>
+              <select onChange={(e) => {this.props.handleChange(e, index)}} name="incomeCategory" className="incomeCategory">
+                <option value="check">Check/DD</option>
+                <option value="cash">Cash</option>
+                {/* <option value="giftCard">Gift Card</option> */}
+                <option value="returnedItem">Returned Item</option>
+                <option value="soldItem">Sold Item</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
 
-          <label>
-            <input onChange={(e) => {this.props.handleChange(e, index)}} name="incomeInput" className="incomeInput" placeholder="Enter Name" type="text" value={incomeItem.name} />
-          </label>
+            <label>
+              <input onChange={(e) => {this.props.handleChange(e, index)}} name="incomeInput" className="incomeInput" placeholder="Enter Name" type="text" value={incomeItem.name} />
+            </label>
+          </div>
 
-          <label>
-            $
-            <input onChange={(e) => {this.props.handleChange(e, index)}} name="incomeAmount" className="amountInput" placeholder="Enter Amount" type="text" value={incomeItem.amount} />
-          </label>
+          <div className="rightHalf">
+            <label>
+              $
+              <input onChange={(e) => {this.props.handleChange(e, index)}} name="incomeAmount" className="amountInput" placeholder="Enter Amount" type="text" value={incomeItem.amount} />
+            </label>
 
-          <label>
-            <input onChange={(e) => {this.props.handleChange(e, index)}} type="date" name="incomeDate" className="dateInput" value={incomeItem.date}/>
-          </label>
+            <label>
+              <input onChange={(e) => {this.props.handleChange(e, index)}} type="date" name="incomeDate" className="dateInput" value={incomeItem.date}/>
+            </label>
+          </div>
+
 
           <button className="incomeRemove" onClick={(e) => {this.props.removeIncome(e,incomeItem)}} >X</button>
         </li>
